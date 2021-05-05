@@ -1,82 +1,56 @@
 import React from "react";
-import PropTypes from "prop-types";
 
+class App extends React.Component{
+  // constructor(props){
+  //   super(props);
+  //   console.log("hello");
+  // }
 
-function Food({fav, picture, rating}) { // props.fav = {fav}
-  // console.log(props.fav); // props.fav =  kimchi 출력
-  return (
-    <div>
-      <h3>I Love {fav}</h3>
-      <img src={picture} alt={fav}></img>
-      <h2>{rating}/5.0</h2>
+  // // state는 object
+  // state ={
+  //   count:0
+  // }
+
+  // add =() =>{
+  //   // state는 바로 변경하지 않고 setState이용 > 아래 render을 바뀐 state로 refresh하지 않기 때문
+  //   // setState를 호출할 때마다 react는 새로운 state와 함께 render function 호출
+  //   this.setState(current=> ({count: current.count +1 }));
+  // };
+  // minus =() =>{
+  //   this.setState(current => ({count: current.count -1}));
+  // };
+  // componentDidMount(){
+  //   console.log("component rendered");
+  // }
+  // componentDidUpdate(){
+  //   console.log("I just updated");
+  // }
+  // componentWillUnmount(){
+  //   console.log("Goodbye, cruel world");
+  // }
+  state ={
+    isLoading :true,
+    movies :[],
+  };
+  componentDidMount(){
+    setTimeout(()=> {
+      this.setState({ isLoading:false, book: true})
+    },6000);
+  }
+
+  render(){
+    // console.log("I'm rendering");
+    // return (
+    // <div>
+    //   <h1>The number is: {this.state.count}</h1>
+    //   <button onClick={this.add}>Add</button>
+    //   <button onClick={this.minus}>Minus</button>
+    // </div>)
+    const { isLoading } = this.state;
+    return <div>
+      {isLoading ? 'Loading': 'We are ready'}
     </div>
-  );
-}
-
-// 아래 propTypes는 변경불가
-Food.propTypes ={
-  fav: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-}
-
-const foodILike = [
-  {
-    id : 1,
-    name: 'kimchi',
-    image : 'http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg',
-    rating : 5,
-  },
-  {
-    id : 2,
-    name: 'ramen',
-    image : 'https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg',
-    rating : 4,
-  },
-  {
-    id : 3,
-    name: 'meat',
-    image : 'https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg',
-    rating : 3.3,
-  },
-  {
-    id : 4,
-    name: 'zzuccumi',
-    image : 'http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg',
-    rating : 4.7,
-  },
-];
-
-// function renderFood(dish){
-//   console.log(dish);
-//   return <Food name ={dish.name} picture={dish.image}/>
-// }
-
-function App() {
-  return ( 
-    <div >
-
-    <h1 > Hello. </h1>
-
-    {/* food component에 property:fav, value:kimchi로 줘서 
-            food function component에 arguments로 넣음 */}
-    {/* <Food fav = 'kimchi' />
-    <Food fav = 'ramen' />
-    <Food fav = 'meat' />
-    <Food fav = 'zzuccumi' /> */}
-
-    {
-    foodILike.map(dish => ( 
-      <Food 
-      key={dish.id} 
-      fav = {dish.name} 
-      picture={dish.image} 
-      rating={dish.rating}/>
-    ))}
-
-    {/* return <div>{foodILike.map(renderFood)}</div>; */}
-    </div>
-  );
+  }
 }
 
 export default App;
