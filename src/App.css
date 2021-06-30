@@ -39,8 +39,9 @@
   }
   
   .movies .movie {
+    height: 400px;
     width: 45%;
-    background-color: white;
+    background-color: lightcyan;
     margin-bottom: 70px;
     display: flex;
     align-items: flex-start;
@@ -62,6 +63,14 @@
       0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
   }
   
+
+  .movie .movie__data {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    
+  }
+
   .movie .movie__title,
   .movie .movie__year {
     margin: 0;
