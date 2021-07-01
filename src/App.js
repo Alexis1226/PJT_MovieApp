@@ -2,8 +2,9 @@ import React from "react";
 import axios from "axios";
 import Movie from "./Movie";
 import "./App.css";
+import Header from "./components/Header";
 
-class App extends React.Component{
+class App extends React.Component {
   // constructor(props){
   //   super(props);
   //   console.log("hello");
@@ -31,31 +32,31 @@ class App extends React.Component{
   // componentWillUnmount(){
   //   console.log("Goodbye, cruel world");
   // }
-  state ={
-    isLoading :true,
-    movies :[],
+  state = {
+    isLoading: true,
+    movies: [],
   };
 
   // axios가 끝날 때까지 기다림
-  getMovies = async()=>{
+  getMovies = async () => {
     // const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
     // console.log(movies.data.data.movies);
     // 위의 식을 ES6에서는 아래와 같이 사용가능
     const {
       data: {
-        data: {
-          movies
-        }
-      }
-    } = await axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=rating");
-    this.setState({movies, isLoading:false});
+        data: { movies },
+      },
+    } = await axios.get(
+      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+    );
+    this.setState({ movies, isLoading: false });
     console.log(movies);
-  }
-  componentDidMount(){
+  };
+  componentDidMount() {
     this.getMovies();
   }
 
-  render(){
+  render() {
     // console.log("I'm rendering");
     // return (
     // <div>
@@ -65,27 +66,32 @@ class App extends React.Component{
     // </div>)
     const { isLoading, movies } = this.state;
     // JSX에서는 class의경우 객체인클래스와 혼동의 우려가 있어 className으로 작성
-    return <section className="container" > { 
-        isLoading ? (
-          <div className="loader">
-            <span className="loader__text">Loading...</span>
-          </div>
-        ) : (
-        <div className="movies">
-          {movies.map(movie => (
-            <Movie
-              key = {movie.id}
-              id = {movie.id}
-              year = {movie.year}
-              title = { movie.title}
-              summary = { movie.summary}
-              poster = { movie.medium_cover_image}
-              genres ={movie.genres}
-            />
-          ))}
-        </div>
-      )} 
-      </section>
+    return (
+      <>
+        <Header />
+        <section className="container">
+          {isLoading ? (
+            <div className="loader">
+              <span className="loader__text">Loading...</span>
+            </div>
+          ) : (
+            <div className="movies">
+              {movies.map((movie) => (
+                <Movie
+                  key={movie.id}
+                  id={movie.id}
+                  year={movie.year}
+                  title={movie.title}
+                  summary={movie.summary}
+                  poster={movie.medium_cover_image}
+                  genres={movie.genres}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      </>
+    );
   }
 }
 
