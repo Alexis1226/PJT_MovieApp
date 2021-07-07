@@ -1,0 +1,82 @@
+.movies .movie {
+  width: 45%;
+  min-width: 490px;
+  background-color: #352420;
+  margin-bottom: 70px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-weight: 300;
+  padding: 20px;
+  border-radius: 5px;
+  color: rgb(233, 233, 224);
+  box-shadow: 13px 10px 0px 1px rgb(175 175 189 / 30%);
+}
+
+.movie img {
+  position: relative;
+  width: 100%;
+  top: -50px;
+  max-width: 150px;
+
+  box-shadow: 0 30px 60px -12px rgb(175 175 189 / 25%),
+    0 18px 36px -18px rgb(175 175 189 / 30%),
+    0 -12px 36px -8px rgb(175 175 189 / 2.5%);
+}
+
+.movie .movie__data {
+  height: 100%;
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.movie .movie__title,
+.movie .movie__year {
+  margin: 0;
+  font-weight: 300;
+}
+
+.movie .movie__title {
+  margin-bottom: 5px;
+  font-size: 24px;
+  color: rgb(250, 250, 231);
+}
+
+.movie .movie__genres {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  margin: 5px 0px;
+}
+
+.movie__genres li,
+.movie .movie__year {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.movie button {
+  border: none;
+  background: none;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  float: left;
+  position: relative;
+  top: 153px;
+  left: -160px;
+  cursor: pointer;
+}
+
+.movie form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.movie svg {
+  width: 2rem;
+  height: 2rem;
+}

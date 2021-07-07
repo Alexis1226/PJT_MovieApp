@@ -19,23 +19,25 @@ function Contents() {
       'https://yts-proxy.now.sh/list_movies.json?sort_by=rating'
     );
 
-    await movies.map((a) => {
-      const newMovie = {
-        ...a,
-        select: 'false',
-      };
-      return newMovie;
-    });
-
+    await movies.map((a) => (a.select = 'false'));
+    sessionStorage.setItem('movies', JSON.stringify(movies));
+    // const localMovies = localStorage.getItem('movies', JSON.parse(movies));
     setState({ movies, isLoading: false });
-    console.log(movies);
   };
 
   useEffect(() => {
     getMovies();
   }, []);
 
-  function selected() {}
+  const [TheMovies, setTheMovies] = useState([]);
+  const sessionMovies = JSON.parse(sessionStorage.getItem('movies', movies));
+
+  // console.log(sessionMovies);
+  useEffect(() => {
+    setTheMovies(sessionMovies);
+    console.log('set완료');
+    return setTheMovies();
+  }, [sessionMovies]);
 
   return (
     <div id="contents">
@@ -45,8 +47,7 @@ function Contents() {
         </div>
       ) : (
         <div className="movies">
-          {movies.map((movie) => {
-            movie.select = 'false';
+          {sessionMovies.map((movie, i) => {
             return (
               <Movie
                 key={movie.id}
@@ -57,6 +58,7 @@ function Contents() {
                 poster={movie.medium_cover_image}
                 genres={movie.genres}
                 selected={movie.select}
+                index={i}
               />
             );
           })}
