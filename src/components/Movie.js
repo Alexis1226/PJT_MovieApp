@@ -3,9 +3,11 @@ import PropTypes, { nominalTypeHack } from 'prop-types';
 import { RiStarLine, RiStarSmileFill } from 'react-icons/ri';
 import './Movie.css';
 
-function Movie({ year, title, summary, poster, genres, selected, index }) {
-  const [select, setSelect] = useState(selected);
-  // console.log(select);
+function Movie({ id, year, title, summary, poster, genres, selected }) {
+  const [select, setSelect] = useState([]);
+  // setSelect(select.push(selected));
+  console.log(select);
+  // setSelect(...select, (select[index] = selected.toString()));
 
   function onClick(e) {
     selected = 'true';
