@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes, { nominalTypeHack } from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { RiStarLine, RiStarSmileFill } from 'react-icons/ri';
 import './Movie.css';
 
 function Movie({
+  id,
   index,
   year,
   title,

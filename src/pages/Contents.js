@@ -1,47 +1,32 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Movie from '../components/Movie';
 
-function Contents() {
-  // API GET요청
-  const [state, setState] = useState({
-    isLoading: true,
-    movies: [],
-  });
-
-  const { isLoading, movies } = state;
-
-  const getMovies = async () => {
-    const {
-      data: {
-        data: { movies },
-      },
-    } = await axios.get(
-      'https://yts-proxy.now.sh/list_movies.json?sort_by=rating'
-    );
-
-    await movies.map((a) => (a.select = 'false'));
-    localStorage.setItem('movies', JSON.stringify(movies));
-    setState({ movies, isLoading: false });
-  };
-
-  useEffect(() => {
-    getMovies();
-  }, []);
+function Contents(apiMovies) {
+  const history = useHistory();
 
   // LocalStorage로부터 data 받기
-  const [TheMovies, setTheMovies] = useState([]);
+  const [theMovies, setTheMovies] = useState({
+    isLoading: true,
+    movies: apiMovies,
+  });
+
+  const { isLoading, movies } = theMovies;
   const localMovies = JSON.parse(localStorage.getItem('movies'));
 
   useEffect(() => {
-    setTheMovies(localMovies);
-    console.log('set완료');
-    return setTheMovies();
-  }, [localMovies]);
+    setTheMovies({
+      isLoading: false,
+      movies: localMovies,
+    });
+  }, []);
 
   function changeSelect(key) {
     localMovies[key].select = 'true';
     localStorage.setItem('movies', JSON.stringify(localMovies));
+    setTimeout(() => {
+      history.push({ pathname: '/tick' });
+    }, 1000);
   }
 
   return (
@@ -57,6 +42,7 @@ function Contents() {
               <Movie
                 key={i}
                 index={i}
+                id={movie.id}
                 year={movie.year}
                 title={movie.title}
                 summary={movie.summary}
