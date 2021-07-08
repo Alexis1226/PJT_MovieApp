@@ -15,18 +15,21 @@ function Contents(apiMovies) {
   const localMovies = JSON.parse(localStorage.getItem('movies'));
 
   useEffect(() => {
-    setTheMovies({
-      isLoading: false,
-      movies: localMovies,
-    });
-  }, []);
+    setTimeout(() => {
+      setTheMovies({
+        isLoading: false,
+        movies: localMovies,
+      });
+    }, 1000);
+    return clearTimeout();
+  }, [localMovies]);
 
   function changeSelect(key) {
     localMovies[key].select = 'true';
     localStorage.setItem('movies', JSON.stringify(localMovies));
-    setTimeout(() => {
-      history.push({ pathname: '/tick' });
-    }, 1000);
+    // setTimeout(() => {
+    // history.push({ pathname: '/tick' });
+    // }, 1000);
   }
 
   return (
